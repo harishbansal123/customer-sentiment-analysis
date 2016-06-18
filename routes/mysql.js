@@ -22,7 +22,7 @@ exports.getConversations = function(req, res, next) {
 
     console.log('connected as id ' + conn.threadId);
 
-    conn.query('SELECT SUPPORT_ID, SUPPORT_NAME, AUDIO_URL, DATETIME, SENTIMENT, SENTIMENT_SCORE, ANGER, JOY FROM SENTIMENTDATA ORDER BY SUPPORT_ID, DATETIME', function (err, rows) {
+    conn.query('SELECT SUPPORT_ID, SUPPORT_NAME, AUDIO_URL, DATETIME, SENTIMENT, SENTIMENT_SCORE, ANGER, JOY FROM sentimentdata ORDER BY SUPPORT_ID, DATETIME', function (err, rows) {
       if (err) {
         console.log(err);
         conn.end();
@@ -113,7 +113,7 @@ exports.getSupportAgents = function(req, res, next) {
 
     console.log('connected as id ' + conn.threadId);
 
-    conn.query('SELECT SUPPORT_ID, SUPPORT_NAME FROM SENTIMENTDATA GROUP BY SUPPORT_ID, SUPPORT_NAME order by support_name', function (err, rows) {
+    conn.query('SELECT SUPPORT_ID, SUPPORT_NAME FROM sentimentdata GROUP BY SUPPORT_ID, SUPPORT_NAME order by support_name', function (err, rows) {
       if (err) {
         console.log(err);
         conn.end();
