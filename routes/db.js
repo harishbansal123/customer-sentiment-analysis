@@ -1,4 +1,4 @@
-var ibmdb = require('ibm_db');
+// var ibmdb = require('ibm_db');
 var moment = require('moment');
 
 var serviceInfo = JSON.parse(process.env.VCAP_SERVICES || '{}');
