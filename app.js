@@ -20,8 +20,8 @@ var USER = "Prasad_A01@infosys.com"
 var CONTAINER = "AudioFiles"
 
 // Retrieve the environment variables provided by Bluemix (Cloud Foundry)
-var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
-var serviceInfo = JSON.parse(process.env.VCAP_SERVICES || '{}');
+// var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
+// var serviceInfo = JSON.parse(process.env.VCAP_SERVICES || '{}');
 
 // VCAP_APPLICATION will provide information about this application when deployed.
 // VCAP_SERVICES will be exposed as a JSON object with each bound service as a member:
@@ -42,6 +42,166 @@ var serviceInfo = JSON.parse(process.env.VCAP_SERVICES || '{}');
   ]
 }
 */
+
+var serviceInfo = {
+   "dashDB": [
+      {
+         "name": "dashDB Customer Sentiment Analysis",
+         "label": "dashDB",
+         "plan": "Entry",
+         "credentials": {
+            "port": 50000,
+            "db": "BLUDB",
+            "username": "dash102864",
+            "ssljdbcurl": "jdbc:db2://awh-yp-small03.services.dal.bluemix.net:50001/BLUDB:sslConnection=true;",
+            "host": "awh-yp-small03.services.dal.bluemix.net",
+            "https_url": "https://awh-yp-small03.services.dal.bluemix.net:8443",
+            "dsn": "DATABASE=BLUDB;HOSTNAME=awh-yp-small03.services.dal.bluemix.net;PORT=50000;PROTOCOL=TCPIP;UID=dash102864;PWD=Q86cXm1TGv1b;",
+            "hostname": "awh-yp-small03.services.dal.bluemix.net",
+            "jdbcurl": "jdbc:db2://awh-yp-small03.services.dal.bluemix.net:50000/BLUDB",
+            "ssldsn": "DATABASE=BLUDB;HOSTNAME=awh-yp-small03.services.dal.bluemix.net;PORT=50001;PROTOCOL=TCPIP;UID=dash102864;PWD=Q86cXm1TGv1b;Security=SSL;",
+            "uri": "db2://dash102864:Q86cXm1TGv1b@awh-yp-small03.services.dal.bluemix.net:50000/BLUDB",
+            "password": "Q86cXm1TGv1b"
+         }
+      },
+      {
+         "name": "dashDB-nk",
+         "label": "dashDB",
+         "plan": "Entry",
+         "credentials": {
+            "port": 50000,
+            "db": "BLUDB",
+            "username": "dash101569",
+            "ssljdbcurl": "jdbc:db2://awh-yp-small02.services.dal.bluemix.net:50001/BLUDB:sslConnection=true;",
+            "host": "awh-yp-small02.services.dal.bluemix.net",
+            "https_url": "https://awh-yp-small02.services.dal.bluemix.net:8443",
+            "dsn": "DATABASE=BLUDB;HOSTNAME=awh-yp-small02.services.dal.bluemix.net;PORT=50000;PROTOCOL=TCPIP;UID=dash101569;PWD=XTIVPp0gtyy6;",
+            "hostname": "awh-yp-small02.services.dal.bluemix.net",
+            "jdbcurl": "jdbc:db2://awh-yp-small02.services.dal.bluemix.net:50000/BLUDB",
+            "ssldsn": "DATABASE=BLUDB;HOSTNAME=awh-yp-small02.services.dal.bluemix.net;PORT=50001;PROTOCOL=TCPIP;UID=dash101569;PWD=XTIVPp0gtyy6;Security=SSL;",
+            "uri": "db2://dash101569:XTIVPp0gtyy6@awh-yp-small02.services.dal.bluemix.net:50000/BLUDB",
+            "password": "XTIVPp0gtyy6"
+         }
+      }
+   ],
+   "speech_to_text": [
+      {
+         "name": "Speech To Text",
+         "label": "speech_to_text",
+         "plan": "standard",
+         "credentials": {
+            "url": "https://stream.watsonplatform.net/speech-to-text/api",
+            "username": "4816563e-8664-46f5-a4ec-b319812dcf48",
+            "password": "C7bMUMliF6Kl"
+         }
+      }
+   ],
+   "cloudantNoSQLDB": [
+      {
+         "name": "Cloudant NoSQL Customer Sentiment Analysis",
+         "label": "cloudantNoSQLDB",
+         "plan": "Shared",
+         "credentials": {
+            "username": "2a7ae6ec-5a2a-44ca-831e-e8d254c6faea-bluemix",
+            "password": "eb3ebf39dffbf57b6a93cb8e6e2533b627f497b3db5a75338b88a3a929b4557a",
+            "host": "2a7ae6ec-5a2a-44ca-831e-e8d254c6faea-bluemix.cloudant.com",
+            "port": 443,
+            "url": "https://2a7ae6ec-5a2a-44ca-831e-e8d254c6faea-bluemix:eb3ebf39dffbf57b6a93cb8e6e2533b627f497b3db5a75338b88a3a929b4557a@2a7ae6ec-5a2a-44ca-831e-e8d254c6faea-bluemix.cloudant.com"
+         }
+      }
+   ],
+   "Object-Storage": [
+      {
+         "name": "Object Storage-n3",
+         "label": "Object-Storage",
+         "plan": "Free",
+         "credentials": {
+            "auth_url": "https://identity.open.softlayer.com",
+            "project": "object_storage_5c19b6ea_ba49_49e0_8982_249c306f1912",
+            "projectId": "ed89ab234cb847b089a314988fa7d388",
+            "region": "dallas",
+            "userId": "38c5fec4a93240f587590724c4b99785",
+            "username": "admin_5c19b6ea-ba49-49e0-8982-249c306f1912_b6eb00ce56ce",
+            "password": "wQ7dolsO-QQ-T8o#",
+            "domainId": "48364eca0c8241389db67ee7a73e47cf",
+            "domainName": "793797"
+         }
+      }
+   ],
+   "alchemy_api": [
+      {
+         "name": "Alchemy Customer Sentiment Analysis",
+         "label": "alchemy_api",
+         "plan": "standard",
+         "credentials": {
+            "url": "https://gateway-a.watsonplatform.net/calls",
+            "apikey": "e32d1b33cac504feb43e11a1094581134ded4e3e",
+            "note": "It may take up to 5 minutes for this key to become active"
+         }
+      }
+   ],
+   "erservice": [
+      {
+         "name": "Embeddable Reporting Customer Sentiment Analysis",
+         "label": "erservice",
+         "plan": "free",
+         "credentials": {
+            "password": "00a03111-5e7b-4107-9216-277a7dcbd0c9",
+            "userid": "4a59c5f7-29bc-4c5b-8533-c7e18eef21c8",
+            "url": "https://erservice-impl.ng.bluemix.net"
+         }
+      }
+   ],
+   "iotf-service": [
+      {
+         "name": "Internet of Things Platform-id",
+         "label": "iotf-service",
+         "plan": "iotf-service-free",
+         "credentials": {
+            "iotCredentialsIdentifier": "a2g6k39sl6r5",
+            "mqtt_host": "olaut5.messaging.internetofthings.ibmcloud.com",
+            "mqtt_u_port": 1883,
+            "mqtt_s_port": 8883,
+            "base_uri": "https://olaut5.internetofthings.ibmcloud.com:443/api/v0001",
+            "http_host": "olaut5.internetofthings.ibmcloud.com",
+            "org": "olaut5",
+            "apiKey": "a-olaut5-f4stjx3rln",
+            "apiToken": "IbEUmDj0Z7cwYNYGvJ"
+         }
+      }
+   ],
+   "twitterinsights": [
+      {
+         "name": "Insights for Twitter-i9",
+         "label": "twitterinsights",
+         "plan": "Free",
+         "credentials": {
+            "username": "a76fa65f-4636-4670-ba14-db4227dcb90a",
+            "password": "HplVeq5So4",
+            "host": "cdeservice.mybluemix.net",
+            "port": 443,
+            "url": "https://a76fa65f-4636-4670-ba14-db4227dcb90a:HplVeq5So4@cdeservice.mybluemix.net"
+         }
+      }
+   ],
+   "SingleSignOn": [
+      {
+         "name": "Single Sign On",
+         "label": "SingleSignOn",
+         "plan": "standard",
+         "credentials": {
+            "secret": "jbrY50e6SR",
+            "tokenEndpointUrl": "https://csa_sso-zc6t85moa5-cs19.iam.ibmcloud.com/idaas/oidc/endpoint/default/token",
+            "authorizationEndpointUrl": "https://csa_sso-zc6t85moa5-cs19.iam.ibmcloud.com/idaas/oidc/endpoint/default/authorize",
+            "issuerIdentifier": "csa_sso-zc6t85moa5-cs19.iam.ibmcloud.com",
+            "clientId": "bZ7qdlAKOO",
+            "serverSupportedScope": [
+               "openid"
+            ]
+         }
+      }
+   ]
+}
 
 console.log("--- VCAP_SERVICES object: ");
 console.log(serviceInfo);
