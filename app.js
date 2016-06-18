@@ -4,7 +4,7 @@ var express = require('express');
 var multer  = require('multer');
 var request = require('request');
 // var ibmdb   = require ('ibm_db');
-var db      = require('./routes/db');
+var db      = require('./routes/mysql');
 var callERS = require('./callERS.js');
 var async = require('async');
 
