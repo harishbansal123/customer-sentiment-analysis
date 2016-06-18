@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<link rel="styleSheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+<link href="css/app.css" rel="stylesheet">
+<script src="js/csa.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/record/utils.js"></script>
+<script src="js/record/Microphone.js"></script>
+<script src="js/record/socket.js"></script>
+<script src="js/record/displaymetadata.js"></script>
+<script src="js/record/handlemicrophone.js"></script>
+<script src="js/record/record.js"></script>
+<script src="js/record/index.js"></script>
+</head>
+<body  ng-app="myApp" ng-controller="customersCtrl" onload="insertReports()">
+<header>
+<div class="header-logo">
+<img src="img/Customer-Satisfaction-Analyzer_logo.png">
+</div>
+<img src="img/IBM-blumix.png" height="40px" class="ibmImg">
+</header>
+<div style="width:100%;height:30px;background-color:#47C5DF">
+<span class="font1 home" >Home</span>
+</div>
+
+<div id="container1" style="border:0px solid green;">
+<div id="col1">
+ <div class="font2" style="margin-left:10px">
+ <form name="searchForm" ng-submit="submit()">
+  <label >Supporting Agent:</label>
+  <select class="selectAgent" ng-model="supportAgent" ng-options="item.SUPPORT_NAME for item in supportAgentList">
+            <option value="">All</option>
+  </select>
+  <br/></br>
+  <label >Date:</label>
+	 <select class="date" 	ng-model="dateCategory" ng-change="controlCustomDate()">
+	     <option value="">All</option>
+		 <option value="Today">Today</option>
+		 <option value="custom">Custom</option>
+		
+	  </select><br/></br>
+  
+  <label >Start Date:</label>
+  <input style="margin-left:45px;" type="text" name="startDate" ng-model="startDate" ng-disabled="disableCustom" class="calenderTextbox" datepicker />
+     
+  <label style="margin-left:10px">End Date:</label>
+  <input style="margin-left:25px;" type="text" name="endDate"  ng-model="endDate" ng-disabled="disableCustom" class="calenderTextbox" datepicker />
+  <button type="submit" class="viewbtn">View</button>
+ </form> 
+ </div>
+
+<div id="recordButton" class="button-row nav-inverse-color">
+            <!--img id="microphoneIcon" src="images/microphone.svg" class="icon"-->
+            <span class="nav-label">Record Audio</span>
+            </div>
+            
+<div style="clear:both;height:20px"></div>
+<div style="clear:both;"> 
+<table id='gridTable'>
+<tr>
+<th style="width:10%">Support ID</th>
+<th style="width:20%">Support Name</th>
+<th style="width:20%">Date Time</th>
+<th style="width:10%">Audio<br>Download</th>
+<th style="width:10%">Play Audio</th>
+<th style="width:20%">Customer Sentiment</th>
+<th style="width:10%">Sentiment Score</th>
+
+</tr>
+
+<tr ng-repeat-start="y in myData " ></tr>
+
+<tr ng-repeat-end ng-repeat="x in y" >
+  <td class="td font4" rowspan="{{y.length}}" ng-if="$first">{{x.SUPPORT_ID}}</td>
+   <td class="td font4" rowspan="{{y.length}}"  ng-if="$first">{{x.SUPPORT_NAME}}<br>
+   <a href='' ng-click="viewChart(x.SUPPORT_ID)" style="color:#00e5e6;">View Chart</a></td>
+   
+  <td class="td font4" style='padding-left:2px;' >{{x.DATETIME.split(" ")[0]}}<br>{{x.DATETIME.split(" ")[1]+" "+x.DATETIME.split(" ")[2]}}</td>
+  
+  <td class="td font4" ><a ng-href="/download/{{x.AUDIO_URL}}"><img src="img/Audio_Download-png.png" alt="na"></a></td>
+  <td class="td font4" ><img src="img/Play-Audio.png" ng-click="playAudio(x.AUDIO_URL)" alt="na"></img></td>
+   <td class="td font4"  ng-switch="x.SENTIMENT">
+   <span style="color:#39e600;" ng-switch-when="positive">(+) ve </span>
+   <span style="color:red" ng-switch-when="negative">(-) ve</span> 
+   <span style="color:red" ng-switch-when="neutral">N</span> 
+   <a href="" ng-click="analyzeData(x.SUPPORT_ID, x.AUDIO_URL)" style='text-decoration:none;'>
+    <span class="AnalyseBtn" ng-switch-when="null"> Analyze </span>
+   </a>
+   <span ng-switch-when="InProgress"><img src="img/busy.gif" alt="Loading"></span>
+   </td>
+
+   <td class="td font4" ng-switch="x.SENTIMENT_SCORE">
+	<span style="color:#39e600;" ng-switch-when="InProgress"><img src="img/busy.gif" alt="Loading"></span>
+	<span style="color:#39e600;" ng-switch-default>{{x.SENTIMENT_SCORE}}</span>
+  </td>
+    
+</tr>
+
+
+<tr ng-repeat-end></tr>
+</table></div>
+</div> <!-- end of col1 div -->
+
+<div id="col2">
+
+<div style='width:100%; margin-top:10px;'>
+<div style='float:left; height:30px;'>
+	<a href=""  id="liveRecordLink" class="liveRecordLink">Live Recording</a>
+</div> 
+<div style="clear:both;"></div>
+<div  id="collapseContent" class='collapseContent font2' >
+	<div style='float:left; margin-left:5px;' >
+		<label>Supporting Agent:</label>
+		<select style="margin-top:10px;" class="selectAgent" ng-model="supportAgent" ng-options="item.SUPPORT_NAME for item in supportAgentList">
+			<option value="">All</option>
+		</select>
+	</div>
+	<div ng-class="recordClass" ng-click="recordAudio()" >
+	   <span style='valign:bottom;'>
+	    <img ng-src="img/{{img}}" class="icon" align="middle"/>
+	    <span class='nav-label' style="margin-top:5px;">Record Audio</span>
+	</div>
+	<div style="clear:both;"></div>
+	<div style="margin:10px; height:100px;"> 
+		<textarea readonly="" id="resultsText" dir="auto">{{content}}</textarea>
+	</div>
+</div>
+</div>
+  
+	   
+<table align="center" border='0' width="80%">
+	<tbody class="report">
+	  <tr class="report" style='text-align:center;' >
+    	<td class="report" style='text-align:center;' >
+	        <span id="insertReport" style='text-align:center;'></span>
+	    </td>
+      </tr>
+	</tbody>
+</table>
+
+ </div>
+</div>
+
+
+</body>
+</html>
+

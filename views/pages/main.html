@@ -1,0 +1,30 @@
+<% include ../partials/header.html %>
+
+<div id="upload-panel">
+  <div class="title-block">
+  <h1 class="title"><span class="thin">Upload a file</span></h1>
+  <form id="upload-form" enctype="multipart/form-data" action="/upload" method="post">
+    <input type="file" name="file-to-upload" style="color: white;" />
+    <input type="submit" value="Upload File" name="submit" />
+  </form>
+  </div>
+</div>
+
+<div id="download-panel">
+  <% if(containerFiles.length > 0) { %>
+  <div class="title-block">
+  <h1 class="title"><span class="thin">Your files</span></h1>
+    <table>
+      <% for (var i = 0; i < containerFiles.length; i++) { %>
+        <tr>
+            <td style="color: white;"><a href="/download/<%= containerFiles[i] %>" style="color: white;"><%= containerFiles[i] %></a></td>
+            <td><a href="/delete/<%= containerFiles[i] %>" style="color: white; padding-left: 10px;">Delete</a></td>
+        </tr>
+      <% } %>
+    </table>
+  <% } %>
+</div>
+
+</div>
+    
+<% include ../partials/footer.html %>

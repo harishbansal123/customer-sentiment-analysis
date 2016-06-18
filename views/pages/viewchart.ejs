@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="css/app.css" rel="stylesheet">
+<script src="js/csa.js"></script>
+<script src="js/charts.js"></script>
+<script>
+function viewChart(supportId){
+alert('Loading Chart for Support ID ' + supportId + '. Please wait..');
+showSupportReport(supportId);
+}
+</script>
+</head>
+<body onload="viewChart(<%= supportId %>)" >
+<table align="center"><tr><td><span id="insertReport"></span></td></tr></table>
+</body>
+</html>

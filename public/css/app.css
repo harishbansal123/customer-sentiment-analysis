@@ -1,0 +1,284 @@
+html,body {
+margin:0px;
+}
+header {
+ width:100%;
+ background-color:#00ADD2;
+ color:white;
+ height:70px;
+ 
+}
+
+.home{
+    background-color: #FFF;
+	height: 30px;
+	margin-left: 50px;
+	padding: 6px 15px;
+	position: relative;
+	top: 7px;  
+}
+.sentimentChart{
+	width:1240px;
+	height:465px;
+	border:0px solid #00add2;
+}
+.chartSeparator{
+    margin-left:51px;
+	float:left;
+	width:1px;
+	height:430px;
+	margin-top:5px;
+	border-right:1px solid #ccffff;
+}
+.personnelChart{
+	background-color: #edf0f0;
+	float:left;
+	width:336px;
+	height:386px;
+	margin-left:438px;
+	margin-top:50px;
+	margin-left:51px;
+	border:0px solid #00add2;
+}
+h3{
+     display:inline;
+}
+
+.font1 {
+    font-family:Arial;
+    font-weight:Bold;
+    font-size:14px;
+	color:#00add2;
+}
+.font2 {
+    font-family:Arial;
+    font-weight:Narrow;
+    font-size:15px;
+	color:#7e7d7d;
+	
+}
+.font3 {
+    font-family:Arial;
+    font-weight:Bold;
+    font-size:16px;
+	color:#000000;
+	display:inline;
+}
+.font4 {
+    font-family:Arial;
+    font-weight:Bold;
+    font-size:12px;
+	color:#7e7d7d;
+}
+
+.calenderTextbox {
+    background: url('../img/Custom-Date.png') right no-repeat;
+    padding-right: 17px;
+	height:32px;
+	width:200px;
+   
+	
+} 
+
+/*
+.viewbtn {
+	padding-left:10px;
+	padding-right:10px;
+	height:32px;
+	border:1px solid #00ADD2;
+	color:#00ADD2;
+	background-color:white;
+	font-weight:bold;
+	margin-left:100px;
+}*/
+.viewbtn {
+    background-color: #4178BE;
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+	font-weight:bold;
+    margin-left:120px;
+    cursor: pointer;
+	height:32px;
+}
+.ibmImg {
+	float:right;
+	/*margin-right:20px;
+	margin-top:25px*/
+}
+.selectAgent {
+	width:200px;
+	height:32px;
+	margin-top:5px;
+}
+.selectAgent1 {
+	width:140px;
+	height:32px;
+	margin-top:5px;
+}
+.date {
+	width:200px;
+	height:33px;
+	margin-left:80px;
+}	
+
+table,tr,th,td{
+ border-collapse:collapse;
+ border-left:0px solid #ddd;
+ border-bottom:0px solid #ddd;
+ /*margin:10px;*/
+}
+th{
+font-family:Arial;
+font-weight: Narrow;
+font-size:15px;
+color:#00ADD2;
+height:50px;
+background-color: #f0f0f0
+}
+.td{
+/*padding-left:10px;*/
+font-family:Arial;
+font-weight: Narrow;
+font-size:12px;
+color:#000000;
+height:40px;
+
+}
+
+#gridTable tr, #gridTable tr td, #gridTable tr th {
+  border-collapse:collapse;
+  border:1px solid #ddd;
+  padding-bottom :5px;
+  /*margin:10px; */
+}
+#gridTable tr:nth-child(even){background-color: #f0f0f0}
+
+.AnalyseBtn{
+padding-top:5px;
+padding-bottom:5px;
+padding-left:10px;
+padding-right:10px;
+border:solid #00ADD2 1px;
+color:#00ADD2;
+text-decoration:none;
+font-weight:bold;
+}
+.header-profile {
+display:inline-block;
+vertical-align: top;
+margin-right:95px;
+}
+.header-logo {
+display:inline-block;
+width: 60%;
+margin-left:40px;
+}
+.headerImg  {
+	vertical-align:middle;
+    margin-top : 20px;	
+}
+.pg, .pb, .tb, .report, .tableRow, tableCell {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.collapseContent{
+width:99%; 
+height:250px; 
+background-color:#f0f0f0; 
+border:1px solid #ddd;
+display:block;	
+}
+
+.nav-label{
+  color:white;
+}
+.icon {
+  width: 2em;
+  margin: 1px;
+  text-align:center;
+
+}
+.recordBtn {
+margin-top:10px; 
+margin-left:125px; 
+width:140px; 
+height:33px; 
+float:left;
+cursor: pointer;
+background-color : #4178BE;
+}
+
+.recordStopBtn{
+margin-top:10px; 
+margin-left:125px;  
+width:140px; 
+height:33px; 
+float:left;
+cursor: pointer;
+background-color : #D74108;
+}
+
+textarea{
+padding: 1em;
+width: 94%;
+height: 85px;
+border: #fff;
+}
+
+legend {font-weight:bold}
+
+fieldset {border:1px solid #ddddd} /* Border width, style and colour */
+
+.positive{
+color:#39e600;
+}
+.negative{
+color:red;
+}
+
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('../img/busy.gif') 
+                50% 50% 
+                no-repeat;
+}
+/*.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        40%;
+    left:       40%;
+	height:     100%;
+    width:      100%;
+	color:green;
+	font-size  : 18px;
+	font-weight:bold;
+	margin:50px;
+	
+}
+				
+.modal:before {
+   content: "Uploading conversation. Please wait... ";
+}*/
+body.loading {
+    overflow: hidden;   
+}
+body.loading .modal {
+    display: block;
+}
+
+
