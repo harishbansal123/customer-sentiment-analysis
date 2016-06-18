@@ -279,10 +279,10 @@ app.post('/api/token', function(req, res, next) {
 
 
 // Use the IP address of the Cloud Foundry DEA (Droplet Execution Agent) that hosts this application
-var host = (process.env.VCAP_APP_HOST || 'localhost');
+var host = (process.env.VCAP_APP_HOST || '0.0.0.0');
 
 // Use the port on the DEA for communication with the application
-var port = (process.env.VCAP_APP_PORT || 3000);
+var port = (process.env.VCAP_APP_PORT || 8080);
 
 // Start server
 app.listen(port, host);
