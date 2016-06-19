@@ -263,7 +263,8 @@ var config = extend({
   url: 'https://stream.watsonplatform.net/speech-to-text/api',
   username: '<username>',
   password: '<password>'
-}, vcapServices.getCredentials('speech_to_text'));
+},serviceInfo['speech-to-text'][0]['credentials']);
+//}, vcapServices.getCredentials('speech_to_text'));
 
 var authService = watson.authorization(config);
 
