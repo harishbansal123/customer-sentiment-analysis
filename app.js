@@ -4,6 +4,7 @@ var express = require('express');
 var multer  = require('multer');
 var request = require('request');
 // var ibmdb   = require ('ibm_db');
+var mysql = require('mysql');
 var db      = require('./routes/mysql');
 var callERS = require('./callERS.js');
 var async = require('async');
@@ -715,7 +716,7 @@ var sentimentAnalysis = function (inputtext,callback){
 
 };
 
-var saveSentimentDetailsToDB = function(sentiment,sentiment_score,audio_url,anger,joy){
+var saveSentimentDetailsToDB_old = function(sentiment,sentiment_score,audio_url,anger,joy){
     var credentials = serviceInfo['dashDB'][1]['credentials'];
     console.log("saveSentimentDetailsToDB - Dash db: " + credentials['db']);
     console.log("saveSentimentDetailsToDB - Dashdb username: " + credentials['username']);
@@ -755,6 +756,64 @@ var saveSentimentDetailsToDB = function(sentiment,sentiment_score,audio_url,ange
 
  });
  
+};
+
+var saveSentimentDetailsToDB = function(sentiment,sentiment_score,audio_url,anger,joy){
+    console.log(sentiment);
+    console.log(sentiment_score);
+    console.log(audio_url);
+    
+    sentiment_score = sentiment_score? sentiment_score: null;
+
+    var connectionParms = {
+      host: process.env.MYSQL_SERVICE_HOST,
+      user: 'sentimentuser',
+      password: 'password',
+      database: 'sentimentdb'
+    }
+
+    var conn = mysql.createConnection(connectionParms);
+    conn.connect(function(err) {    
+        if (err) {
+          console.log(err);
+          req.error = err;
+          next();
+        }
+
+        conn.query('UPDATE sentimentdata SET SENTIMENT = ?, SENTIMENT_SCORE = ?, ANGER = ?, JOY = ? WHERE AUDIO_URL = ?', [sentiment,sentiment_score,anger,joy,audio_url], function (err, result) {
+          if (err) {
+            console.log(err);
+            conn.end();
+            return;
+          }
+          else console.log(result);
+
+          conn.end(function () {
+            console.log('done');
+            req.success = true;
+            req.result = result;
+            next();
+          });
+        });    
+    
+    /**
+    ibmdb.open(connString,function(err,conn){
+        conn.prepare("UPDATE DASH101569.SENTIMENTDATA SET SENTIMENT = ?, SENTIMENT_SCORE = ?, ANGER = ?, JOY = ? WHERE AUDIO_URL = ?", function (err, stmt) {
+        if (err) {
+          //could not prepare for some reason 
+          console.log(err);
+          return conn.closeSync();
+        }
+ 
+        //Bind and Execute the statment asynchronously 
+        stmt.execute([sentiment,sentiment_score,anger,joy,audio_url], function (err, result) {
+            if( err ) console.log(err);  
+            else result.closeSync();
+ 
+            //Close the connection 
+            conn.close(function(err){});
+        }); **/
+    });
 };
 
 app.post('/analyse/sentiment', function(req, res) {

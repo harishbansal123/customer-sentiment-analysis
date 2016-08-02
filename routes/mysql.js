@@ -136,14 +136,31 @@ exports.getSupportAgents = function(req, res, next) {
 }
 
 exports.addConversation = function(req, res, next) {
-  mysql.open(getConnectionParams(), function(err, conn) {
+  var conn = mysql.createConnection(getConnectionParams());
+  conn.connect(function(err) {    
     if (err) {
       console.log(err);
       req.error = err;
       next();
     }
 
-    conn.prepare('INSERT INTO DASH101569.SENTIMENTDATA(SUPPORT_ID, SUPPORT_NAME, AUDIO_URL, DATETIME) values(?, ?, ?, now())', function (err, stmt) {
+    conn.query('INSERT INTO sentimentdata(SUPPORT_ID, SUPPORT_NAME, AUDIO_URL, DATETIME) values(?, ?, ?, now())', [req.params.supportid, req.params.supportname, req.params.filename], function (err, result) {
+      if (err) {
+        console.log(err);
+        conn.end();
+        return;
+      }
+      else console.log(result);
+
+      conn.end(function () {
+        console.log('done');
+        req.success = true;
+        req.result = result;
+        next();
+      });
+    });
+
+    /**conn.prepare('INSERT INTO DASH101569.SENTIMENTDATA(SUPPORT_ID, SUPPORT_NAME, AUDIO_URL, DATETIME) values(?, ?, ?, now())', function (err, stmt) {
       if (err) {
         console.log(err);
       req.error = err;
@@ -164,6 +181,6 @@ exports.addConversation = function(req, res, next) {
         }
         });
       }
-    });
+    });**/
   });
 }
