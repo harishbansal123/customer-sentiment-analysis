@@ -84,7 +84,7 @@ exports.getSearchInfo = function(req, res, next) {
       }
    }
 
-    var qry = 'SELECT SUPPORT_ID, SUPPORT_NAME, AUDIO_URL, DATETIME, SENTIMENT, SENTIMENT_SCORE, ANGER, JOY FROM DASH101569.SENTIMENTDATA ' + condition + ' ORDER BY SUPPORT_ID, DATETIME';
+    var qry = 'SELECT SUPPORT_ID, SUPPORT_NAME, AUDIO_URL, DATETIME, SENTIMENT, SENTIMENT_SCORE, ANGER, JOY FROM SENTIMENTDATA ' + condition + ' ORDER BY SUPPORT_ID, DATETIME';
     console.log("SEARCH QUERY : " + qry);
 
     conn.query(qry, function (err, rows) {
