@@ -97,7 +97,7 @@ exports.getSearchInfo = function(req, res, next) {
       
       console.log('DB Search functionality Done');
 
-      conn.close(function () {
+      conn.end(function () {
       
         //res.send(rows);
         req.searchResults = rows;
