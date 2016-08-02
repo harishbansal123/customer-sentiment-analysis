@@ -73,7 +73,7 @@ app.controller('customersCtrl', function($scope, $http,$window) {
   	            foundObject.SENTIMENT =  response.data.sentiment.docSentiment.type; 
 				foundObject.SENTIMENT_SCORE= response.data.sentiment.docSentiment.score; 
 				//foundObject.ANGER= response.data.emotion.docEmotions.anger; 
-				$window.insertReports();
+				// $window.insertReports();
 		   });
   }
   

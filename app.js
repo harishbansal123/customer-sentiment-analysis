@@ -790,8 +790,6 @@ var saveSentimentDetailsToDB = function(sentiment,sentiment_score,audio_url,ange
 
           conn.end(function () {
             console.log('done');
-            req.success = true;
-            req.result = result;
             next();
           });
         });    
